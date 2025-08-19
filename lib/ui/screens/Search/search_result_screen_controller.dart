@@ -96,7 +96,7 @@ class SearchResultScreenController extends GetxController
     final args = Get.arguments;
     if (args != null) {
       queryString.value = args;
-      resultContent.value = await musicServices.search(args);
+      resultContent.value = await musicServices.search(args, limit: 30);
       final allKeys = resultContent.keys.where((element) => ([
             "Songs",
             "Videos",

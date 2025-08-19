@@ -487,9 +487,13 @@ class MusicServices extends getx.GetxService {
   Future<List<String>> getSearchSuggestion(String queryStr) async {
     final data = Map.from(_context);
     data['input'] = queryStr;
-    final res = nav(
-            (await _sendRequest("music/get_search_suggestions", data)).data,
-            ['contents', 0, 'searchSuggestionsSectionRenderer', 'contents']) ??
+    final response = await _sendRequest("music/get_search_suggestions", data);
+    final res = nav(response.data, [
+          'contents',
+          0,
+          'searchSuggestionsSectionRenderer',
+          'contents'
+        ]) ??
         [];
     return res
         .map<String?>((item) {
@@ -525,7 +529,7 @@ class MusicServices extends getx.GetxService {
       int limit = 30,
       bool ignoreSpelling = false}) async {
     final data = Map.of(_context);
-    data['context']['client']["hl"] = 'en';
+    // Respect current app language for relevance; fallback handled by controller
     data['query'] = query;
 
     final Map<String, dynamic> searchResults = {};
