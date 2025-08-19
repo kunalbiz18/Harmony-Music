@@ -46,6 +46,9 @@ class SettingsScreenController extends GetxController {
   final backgroundPlayEnabled = true.obs;
   final restorePlaybackSession = false.obs;
   final cacheHomeScreenData = true.obs;
+  // Car mode / large UI scaling
+  final isCarModeEnabled = false.obs;
+  final uiScaleFactor = 1.0.obs;
   final currentVersion = "V1.12.0";
 
   @override
@@ -99,6 +102,8 @@ class SettingsScreenController extends GetxController {
     restorePlaybackSession.value =
         setBox.get("restrorePlaybackSession") ?? false;
     cacheHomeScreenData.value = setBox.get("cacheHomeScreenData") ?? true;
+    isCarModeEnabled.value = setBox.get("isCarModeEnabled") ?? false;
+    uiScaleFactor.value = (setBox.get("uiScaleFactor") ?? (isCarModeEnabled.value ? 1.35 : 1.0)) * 1.0;
     streamingQuality.value =
         AudioQuality.values[setBox.get('streamingQuality')];
     playerUi.value = isDesktop ? 0 : (setBox.get('playerUi') ?? 0);
@@ -126,6 +131,16 @@ class SettingsScreenController extends GetxController {
     }
     autoDownloadFavoriteSongEnabled.value =
         setBox.get("autoDownloadFavoriteSongEnabled") ?? false;
+  }
+
+  void toggleCarMode(bool val) {
+    isCarModeEnabled.value = val;
+    final scale = val ? 1.35 : 1.0;
+    uiScaleFactor.value = scale;
+    setBox.put("isCarModeEnabled", val);
+    setBox.put("uiScaleFactor", scale);
+    // Recreate theme to apply scale immediately
+    Get.find<ThemeController>().changeThemeModeType(themeModetype.value);
   }
 
   void setAppLanguage(String? val) {
