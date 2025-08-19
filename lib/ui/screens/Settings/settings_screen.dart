@@ -202,18 +202,7 @@ class SettingsScreen extends StatelessWidget {
                                 settingsController.slidableActionEnabled.isTrue,
                             onChanged: settingsController.toggleSlidableAction),
                       )),
-                  ListTile(
-                      contentPadding:
-                          const EdgeInsets.only(left: 5, right: 10),
-                      title: const Text("Car mode (large UI)"),
-                      subtitle: Text(
-                          "Enlarge fonts and touch targets for in-car tablets.",
-                          style: Theme.of(context).textTheme.bodyMedium),
-                      trailing: Obx(
-                        () => CustSwitch(
-                            value: settingsController.isCarModeEnabled.isTrue,
-                            onChanged: settingsController.toggleCarMode),
-                      )),
+                  
                 ],
               ),
               CustomExpansionTile(

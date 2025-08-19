@@ -52,10 +52,8 @@ class MyApp extends StatelessWidget {
         fallbackLocale: const Locale("en"),
         builder: (context, child) {
           final mQuery = MediaQuery.of(context);
-          // Apply global UI scaling; car mode enlarges tap targets/fonts
-          final carScale = Get.find<SettingsScreenController>().uiScaleFactor.value;
-          final scale = mQuery.textScaler.clamp(
-              minScaleFactor: 1.0 * carScale, maxScaleFactor: 1.1 * carScale);
+          final scale =
+              mQuery.textScaler.clamp(minScaleFactor: 1.0, maxScaleFactor: 1.1);
           return Stack(
             children: [
               GetX<ThemeController>(
