@@ -128,6 +128,8 @@ class SettingsScreenController extends GetxController {
         setBox.get("autoDownloadFavoriteSongEnabled") ?? false;
   }
 
+  
+
   void setAppLanguage(String? val) {
     Get.updateLocale(Locale(val!));
     Get.find<MusicServices>().hlCode = val;

@@ -202,6 +202,7 @@ class SettingsScreen extends StatelessWidget {
                                 settingsController.slidableActionEnabled.isTrue,
                             onChanged: settingsController.toggleSlidableAction),
                       )),
+                  
                 ],
               ),
               CustomExpansionTile(
@@ -675,7 +676,7 @@ class SettingsScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          "Harmony Music",
+                          "ENSOUND",
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Text(settingsController.currentVersion,
